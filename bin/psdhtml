@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+let pkg = require('../package.json');
+let program = require('commander');
+let run = require('../index.js');
+let path = require('path');
+
+program
+    .version(pkg.version)
+    .option('--imagedir', 'The name of png directory (default "image")')
+    .option('--scssdir', 'The name of scss directory (default "scss")')
+    .option('--cssunit', 'The unit of css element (default "px")')
+    .option('-w, --workdir', 'Working directory (default process.cwd())')
+    .parse(process.argv);
+
+let psdFile = program.args[0];
+
+if (!psdFile) {
+    program.outputHelp();
+    return;
+}
+
+psdFile = path.resolve(process.cwd(), psdFile);
+
+run(psdFile, {
+    imagedir: program.imagedir,
+    scssdir: program.scssdir,
+    workdir: program.w,
+    cssunit: program.cssunit
+}).then(() => {
+    console.log('doned');
+});
