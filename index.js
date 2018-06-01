@@ -8,7 +8,7 @@ module.exports = function (psdFile, options = {}) {
     let psd = PSD.fromFile(psdFile);
     let fileName = path.basename(psdFile, '.psd');
 
-    options.imagedir = options.imagedir || 'image';
+    options.imagedir = options.imagedir || 'images';
     options.scssdir = options.scssdir || 'scss';
     options.workdir = options.workdir || process.cwd();
 
