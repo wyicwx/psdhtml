@@ -7,10 +7,10 @@ let path = require('path');
 
 program
     .version(pkg.version)
-    .option('--imagedir', 'The name of png directory (default "image")')
-    .option('--scssdir', 'The name of scss directory (default "scss")')
-    .option('--cssunit', 'The unit of css element (default "px")')
-    .option('-w, --workdir', 'Working directory (default process.cwd())')
+    .option('--imagedir <value>', 'The name of png directory (default "image")')
+    .option('--scssdir <value>', 'The name of scss directory (default "scss")')
+    .option('--cssunit <value>', 'The unit of css element (default "px")')
+    .option('-w, --workdir <value>', 'Working directory (default process.cwd())')
     .parse(process.argv);
 
 let psdFile = program.args[0];
@@ -20,12 +20,12 @@ if (!psdFile) {
     return;
 }
 
-psdFile = path.resolve(process.cwd(), psdFile);
+psdFile = path.resolve(program.workdir || process.cwd(), psdFile);
 
 run(psdFile, {
     imagedir: program.imagedir,
     scssdir: program.scssdir,
-    workdir: program.w,
+    workdir: program.workdir,
     cssunit: program.cssunit
 }).then(() => {
     console.log('doned');
