@@ -27,7 +27,7 @@ module.exports = function (psdFile, options = {}) {
         let scss = tree.exportScss('/$rem');
 
         html = [`<layout src="../../commons/layouts/rem.html" data-css="./css/index.css">`, html, '</layout>'];
-        scss = [`@import 'global.scss';`, '', scss];
+        scss = [`@import 'global.scss';`, '$line_height: 1.5;', '', scss];
 
         fs.writeFileSync(path.join(options.scssdir, fileName + '.scss'), scss.join('\r'));
         fs.writeFileSync(path.join(options.workdir, fileName + '.html'), html.join('\r'));
